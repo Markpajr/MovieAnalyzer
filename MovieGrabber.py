@@ -52,10 +52,14 @@ def Scrape_Movies():
     # Loops through Movie div list to extract all movie info into pandas df
     for movie in movie_divs:
         movie_title = movie.select_one('.movieTitle').text
-        tomato_score = movie.select_one('.tMeterScore').text
-        tomato_score = int(tomato_score[:-1])
+        tomato_score = int(movie.select_one('.tMeterScore').text[:-1])
+        release_date = movie.select_one('.release-date').text.split()[1:]
+        release_date = ' '.join(release_date)
+        movie_url = 'https://www.rottentomatoes.com' + movie.select_one('a')['href']
         print(movie_title)
         print(tomato_score)
+        print(release_date)
+        print(movie_url)
     print(show_count)
 
 
